@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download Your Free Guide</title>
+    <title>Get Your Free Guide</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            color: #333;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f9;
+            color: #333;
         }
         .container {
             max-width: 600px;
@@ -27,6 +27,16 @@
         p {
             font-size: 16px;
             line-height: 1.5;
+        }
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        ul li {
+            background: #f8f8f8;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 5px;
         }
         input[type="email"] {
             width: 80%;
@@ -56,29 +66,31 @@
 </head>
 <body>
     <div class="container">
-        <h1>Activate Your Potential</h1>
+        <h1>Unlock Your Mental Clarity</h1>
         <p><strong>Download your FREE guide:</strong> "5 Steps to Detox Your Pineal Gland"</p>
-        <p>Enter your email address below to get your guide instantly:</p>
+        <ul>
+            <li>Improve your focus and mental clarity.</li>
+            <li>Boost your sleep and energy naturally.</li>
+            <li>Activate your spiritual potential.</li>
+        </ul>
+        <p>Enter your email below to get your free guide instantly:</p>
         <form id="emailForm">
-            <input type="email" id="email" placeholder="Enter your email" required>
+            <input type="email" id="emailInput" placeholder="Enter your email" required>
             <button type="submit">Get My Free Guide</button>
         </form>
-        <p class="privacy">We respect your privacy. Your email is safe with us.</p>
+        <p class="privacy">We respect your privacy. No spam, ever.</p>
     </div>
 
     <script>
-        document.getElementById('emailForm').addEventListener('submit', async function(event) {
+        // Define the AWS Lambda API endpoint
+        const apiEndpoint = 'https://abc123.execute-api.us-west-1.amazonaws.com/prod'; // Replace with your endpoint
+
+        document.getElementById('emailForm').addEventListener('submit', async (event) => {
             event.preventDefault();
-
-            const email = document.getElementById('email').value;
-            const apiEndpoint = '<your-aws-lambda-endpoint>'; // Reemplaza con el endpoint generado en API Gateway
-
-            if (!email) {
-                alert('Please enter a valid email address.');
-                return;
-            }
+            const email = document.getElementById('emailInput').value;
 
             try {
+                // Send email to AWS Lambda
                 const response = await fetch(apiEndpoint, {
                     method: 'POST',
                     headers: {
@@ -88,14 +100,15 @@
                 });
 
                 if (response.ok) {
-                    alert('Thank you! Your guide is being downloaded.');
-                    window.location.href = 'guide.pdf'; // Cambia el nombre si el archivo PDF tiene otro nombre.
+                    alert('Email submitted successfully! Your PDF will download shortly.');
+                    // Trigger PDF download
+                    window.location.href = 'guide.pdf'; // Adjust the file name/path as needed
                 } else {
-                    alert('There was an error submitting your email. Please try again.');
+                    alert('Something went wrong. Please try again later.');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('A network error occurred. Please try again.');
+                alert('There was an error submitting your email. Please try again later.');
             }
         });
     </script>
