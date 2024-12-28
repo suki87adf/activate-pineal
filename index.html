@@ -75,40 +75,37 @@
         </ul>
         <p>Enter your email below to get your free guide instantly:</p>
         <form id="emailForm">
-            <input type="email" id="emailInput" placeholder="Enter your email" required>
+            <input type="email" id="email" placeholder="Enter your email" required>
             <button type="submit">Get My Free Guide</button>
         </form>
         <p class="privacy">We respect your privacy. No spam, ever.</p>
     </div>
 
     <script>
-        // Define the AWS Lambda API endpoint
-        const apiEndpoint = 'https://abc123.execute-api.us-west-1.amazonaws.com/prod'; // Replace with your endpoint
+        const form = document.getElementById('emailForm');
+        const endpoint = "https://0c48bmyqb9.execute-api.us-east-2.amazonaws.com/$default"; // Reemplazado con tu endpoint AWS
 
-        document.getElementById('emailForm').addEventListener('submit', async (event) => {
-            event.preventDefault();
-            const email = document.getElementById('emailInput').value;
+        form.addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
 
             try {
-                // Send email to AWS Lambda
-                const response = await fetch(apiEndpoint, {
+                const response = await fetch(endpoint, {
                     method: 'POST',
                     headers: {
-                        'Content-Type': 'application/json'
+                        'Content-Type': 'application/json',
                     },
                     body: JSON.stringify({ email: email })
                 });
 
                 if (response.ok) {
-                    alert('Email submitted successfully! Your PDF will download shortly.');
-                    // Trigger PDF download
-                    window.location.href = 'guide.pdf'; // Adjust the file name/path as needed
+                    alert('Thank you! Your guide will be sent to your email shortly.');
                 } else {
-                    alert('Something went wrong. Please try again later.');
+                    alert('Something went wrong. Please try again.');
                 }
             } catch (error) {
                 console.error('Error:', error);
-                alert('There was an error submitting your email. Please try again later.');
+                alert('An error occurred. Please try again later.');
             }
         });
     </script>
