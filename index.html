@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Get Your Free Guide</title>
+    <title>Activate Pineal - Get Your Free Guide</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -27,16 +27,6 @@
         p {
             font-size: 16px;
             line-height: 1.5;
-        }
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
-        ul li {
-            background: #f8f8f8;
-            margin: 10px 0;
-            padding: 10px;
-            border-radius: 5px;
         }
         input[type="email"] {
             width: 80%;
@@ -68,17 +58,41 @@
     <div class="container">
         <h1>Unlock Your Mental Clarity</h1>
         <p><strong>Download your FREE guide:</strong> "5 Steps to Detox Your Pineal Gland"</p>
-        <ul>
-            <li>Improve your focus and mental clarity.</li>
-            <li>Boost your sleep and energy naturally.</li>
-            <li>Activate your spiritual potential.</li>
-        </ul>
         <p>Enter your email below to get your free guide instantly:</p>
-        <form action="https://activatepineal.com/guide.pdf" method="get" target="_blank">
-            <input type="email" placeholder="Enter your email" required>
+        <form id="emailForm">
+            <input type="email" id="email" placeholder="Enter your email" required>
             <button type="submit">Get My Free Guide</button>
         </form>
         <p class="privacy">We respect your privacy. No spam, ever.</p>
     </div>
+
+    <script>
+        document.getElementById("emailForm").addEventListener("submit", async function(event) {
+            event.preventDefault();
+
+            const email = document.getElementById("email").value;
+            const apiUrl = "https://<your-aws-lambda-endpoint>"; // Reemplaza con el endpoint de tu función Lambda.
+
+            try {
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                    },
+                    body: JSON.stringify({ email: email }),
+                });
+
+                if (response.ok) {
+                    alert("Thank you! Your email has been registered. Your PDF is downloading...");
+                    window.location.href = "guide.pdf"; // Cambia "guide.pdf" si tu archivo tiene otro nombre o ruta.
+                } else {
+                    alert("There was an error. Please try again.");
+                }
+            } catch (error) {
+                console.error("Error:", error);
+                alert("There was an error connecting to the server.");
+            }
+        });
+    </script>
 </body>
 </html>
