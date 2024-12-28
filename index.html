@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activate Pineal - Get Your Free Guide</title>
+    <title>Download Your Free Guide</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
             background-color: #f4f4f9;
             color: #333;
+            margin: 0;
+            padding: 0;
         }
         .container {
             max-width: 600px;
@@ -56,41 +56,46 @@
 </head>
 <body>
     <div class="container">
-        <h1>Unlock Your Mental Clarity</h1>
+        <h1>Activate Your Potential</h1>
         <p><strong>Download your FREE guide:</strong> "5 Steps to Detox Your Pineal Gland"</p>
-        <p>Enter your email below to get your free guide instantly:</p>
+        <p>Enter your email address below to get your guide instantly:</p>
         <form id="emailForm">
             <input type="email" id="email" placeholder="Enter your email" required>
             <button type="submit">Get My Free Guide</button>
         </form>
-        <p class="privacy">We respect your privacy. No spam, ever.</p>
+        <p class="privacy">We respect your privacy. Your email is safe with us.</p>
     </div>
 
     <script>
-        document.getElementById("emailForm").addEventListener("submit", async function(event) {
+        document.getElementById('emailForm').addEventListener('submit', async function(event) {
             event.preventDefault();
 
-            const email = document.getElementById("email").value;
-            const apiUrl = "https://<your-aws-lambda-endpoint>"; // Reemplaza con el endpoint de tu función Lambda.
+            const email = document.getElementById('email').value;
+            const apiEndpoint = '<your-aws-lambda-endpoint>'; // Reemplaza con el endpoint generado en API Gateway
+
+            if (!email) {
+                alert('Please enter a valid email address.');
+                return;
+            }
 
             try {
-                const response = await fetch(apiUrl, {
-                    method: "POST",
+                const response = await fetch(apiEndpoint, {
+                    method: 'POST',
                     headers: {
-                        "Content-Type": "application/json",
+                        'Content-Type': 'application/json'
                     },
-                    body: JSON.stringify({ email: email }),
+                    body: JSON.stringify({ email: email })
                 });
 
                 if (response.ok) {
-                    alert("Thank you! Your email has been registered. Your PDF is downloading...");
-                    window.location.href = "guide.pdf"; // Cambia "guide.pdf" si tu archivo tiene otro nombre o ruta.
+                    alert('Thank you! Your guide is being downloaded.');
+                    window.location.href = 'guide.pdf'; // Cambia el nombre si el archivo PDF tiene otro nombre.
                 } else {
-                    alert("There was an error. Please try again.");
+                    alert('There was an error submitting your email. Please try again.');
                 }
             } catch (error) {
-                console.error("Error:", error);
-                alert("There was an error connecting to the server.");
+                console.error('Error:', error);
+                alert('A network error occurred. Please try again.');
             }
         });
     </script>
