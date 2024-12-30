@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Activate Pineal</title>
+    <title>Activate Pineal - Boost Your Energy</title>
     <style>
         body {
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
-            background-color: #f4f4f9;
+            background-color: #f9f9f9;
         }
         .container {
             max-width: 800px;
@@ -22,14 +22,20 @@
         h1, h2 {
             color: #333;
         }
-        p {
+        p, li {
             line-height: 1.6;
             color: #555;
         }
-        .form-section {
+        .advice-section {
             margin-top: 20px;
+        }
+        .advice-item {
+            margin-bottom: 20px;
+        }
+        .form-section {
+            margin-top: 30px;
             padding: 20px;
-            background: #f9f9f9;
+            background: #f4f4f9;
             border-radius: 8px;
             border: 1px solid #ddd;
         }
@@ -63,19 +69,28 @@
 </head>
 <body>
     <div class="container">
-        <h1>Activate Your Pineal Gland</h1>
-        <p>Learn how to unlock the full potential of your mind and body by activating your pineal gland. Our guide provides valuable insights and practical tips for enhancing your focus, health, and spiritual growth.</p>
+        <h1>Boost Your Energy and Focus!</h1>
+        <p>Discover the secrets to enhancing your energy and focus through simple, actionable steps. Your pineal gland plays a vital role in regulating your sleep, mood, and spiritual awareness. Download our guide and take control of your health and well-being!</p>
 
-        <h2>Benefits of Activation:</h2>
-        <ul>
-            <li>Improved mental clarity and focus</li>
-            <li>Enhanced spiritual awareness</li>
-            <li>Better sleep and overall health</li>
-        </ul>
+        <div class="advice-section">
+            <h2>3 Simple Tips to Activate Your Pineal Gland:</h2>
+            <div class="advice-item">
+                <h3>1. Sunlight Exposure</h3>
+                <p>Spend at least 20 minutes a day in natural sunlight to help regulate your circadian rhythm and boost melatonin production.</p>
+            </div>
+            <div class="advice-item">
+                <h3>2. Healthy Diet</h3>
+                <p>Include foods rich in antioxidants, such as blueberries, spinach, and nuts, to protect your pineal gland from toxins.</p>
+            </div>
+            <div class="advice-item">
+                <h3>3. Meditation</h3>
+                <p>Practice daily meditation to stimulate your pineal gland and improve your focus and spiritual connection.</p>
+            </div>
+        </div>
 
         <div class="form-section">
-            <h2>Download Your Free Guide</h2>
-            <p>Enter your email below to receive a free PDF guide with steps and tips to activate your pineal gland.</p>
+            <h2>Download Your Free PDF Guide</h2>
+            <p>Enter your email address below to receive your free guide with detailed steps and tips to activate your pineal gland.</p>
             <form id="email-form">
                 <input type="email" id="userEmail" placeholder="Enter your email address" required>
                 <button type="submit">Download PDF</button>
@@ -99,8 +114,8 @@
                 });
 
                 if (response.ok) {
-                    messageElement.innerHTML = '<p class="success-message">Thank you! The PDF is being downloaded.</p>';
-                    window.location.href = 'path/to/your.pdf'; // Replace with the actual path to your PDF
+                    messageElement.innerHTML = '<p class="success-message">Thank you! Your PDF is being downloaded.</p>';
+                    window.location.href = 'path/to/your.pdf'; // Reemplaza con la URL de tu PDF
                 } else {
                     messageElement.innerHTML = '<p class="error-message">There was an error. Please try again.</p>';
                 }
