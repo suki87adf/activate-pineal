@@ -3,98 +3,109 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Download PDF</title>
+    <title>Activate Pineal</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            text-align: center;
             margin: 0;
             padding: 0;
-            background-color: #f8f9fa;
+            background-color: #f4f4f9;
         }
         .container {
-            margin-top: 100px;
-            background: #fff;
+            max-width: 800px;
+            margin: 20px auto;
             padding: 20px;
+            background: #fff;
             border-radius: 8px;
             box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-            display: inline-block;
+        }
+        h1, h2 {
+            color: #333;
+        }
+        p {
+            line-height: 1.6;
+            color: #555;
+        }
+        .form-section {
+            margin-top: 20px;
+            padding: 20px;
+            background: #f9f9f9;
+            border-radius: 8px;
+            border: 1px solid #ddd;
         }
         input[type="email"] {
-            width: 300px;
+            width: calc(100% - 20px);
             padding: 10px;
-            margin: 10px 0;
-            border: 1px solid #ccc;
+            margin-bottom: 10px;
+            border: 1px solid #ddd;
             border-radius: 5px;
-            font-size: 16px;
         }
         button {
-            background-color: #28a745;
+            background-color: #4CAF50;
             color: white;
-            padding: 10px 20px;
+            padding: 10px 15px;
             border: none;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 16px;
         }
         button:hover {
-            background-color: #218838;
+            background-color: #45a049;
         }
-        .message {
-            margin-top: 15px;
+        .success-message {
+            color: green;
+            margin-top: 10px;
+        }
+        .error-message {
             color: red;
+            margin-top: 10px;
         }
     </style>
 </head>
 <body>
     <div class="container">
-        <h1>Download Your Free PDF</h1>
-        <p>Enter your email below to download the PDF:</p>
-        <input type="email" id="email" placeholder="Enter your email" required>
-        <button id="submitButton">Submit and Download</button>
-        <div id="message" class="message"></div>
+        <h1>Activate Your Pineal Gland</h1>
+        <p>Learn how to unlock the full potential of your mind and body by activating your pineal gland. Our guide provides valuable insights and practical tips for enhancing your focus, health, and spiritual growth.</p>
+
+        <h2>Benefits of Activation:</h2>
+        <ul>
+            <li>Improved mental clarity and focus</li>
+            <li>Enhanced spiritual awareness</li>
+            <li>Better sleep and overall health</li>
+        </ul>
+
+        <div class="form-section">
+            <h2>Download Your Free Guide</h2>
+            <p>Enter your email below to receive a free PDF guide with steps and tips to activate your pineal gland.</p>
+            <form id="email-form">
+                <input type="email" id="userEmail" placeholder="Enter your email address" required>
+                <button type="submit">Download PDF</button>
+            </form>
+            <div id="message"></div>
+        </div>
     </div>
 
     <script>
-        document.getElementById("submitButton").addEventListener("click", async () => {
-            const email = document.getElementById("email").value;
-            const messageDiv = document.getElementById("message");
+        document.getElementById("email-form").addEventListener("submit", async function(event) {
+            event.preventDefault();
 
-            // Validar email vacío
-            if (!email) {
-                messageDiv.textContent = "Please enter a valid email address.";
-                return;
-            }
-
-            messageDiv.textContent = "Processing your request...";
-            messageDiv.style.color = "black";
+            const userEmail = document.getElementById("userEmail").value;
+            const messageElement = document.getElementById("message");
 
             try {
-                // Hacer una solicitud POST a API Gateway
-                const response = await fetch("https://wfyr06j5t2.execute-api.us-east-1.amazonaws.com/test", {
-                    method: "POST",
-                    headers: {
-                        "Content-Type": "application/json",
-                    },
-                    body: JSON.stringify({ email }),
+                const response = await fetch('<YOUR_API_GATEWAY_ENDPOINT>', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ email: userEmail })
                 });
 
                 if (response.ok) {
-                    messageDiv.style.color = "green";
-                    messageDiv.textContent = "Email submitted successfully! Downloading your PDF...";
-
-                    // Descarga automática del PDF
-                    setTimeout(() => {
-                        window.location.href = "https://yourdomain.com/your-pdf-file.pdf"; // Reemplaza con la URL de tu PDF
-                    }, 2000);
+                    messageElement.innerHTML = '<p class="success-message">Thank you! The PDF is being downloaded.</p>';
+                    window.location.href = 'path/to/your.pdf'; // Replace with the actual path to your PDF
                 } else {
-                    const errorData = await response.json();
-                    messageDiv.style.color = "red";
-                    messageDiv.textContent = `Error: ${errorData.message || "Failed to submit email."}`;
+                    messageElement.innerHTML = '<p class="error-message">There was an error. Please try again.</p>';
                 }
             } catch (error) {
-                messageDiv.style.color = "red";
-                messageDiv.textContent = `Error: ${error.message || "Something went wrong."}`;
+                messageElement.innerHTML = '<p class="error-message">An error occurred. Please try again later.</p>';
             }
         });
     </script>
